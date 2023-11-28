@@ -1,0 +1,111 @@
+$white: #f2f2f2;
+$primary: #d789d7;
+$secondary: #2a3d66;
+$tertiary: #2c284f;
+$fourth: #9d65c9;
+
+body {
+    background-image: url('./images/vine-top-left.png'),
+    url('./images/vine-top-right.png'),
+    url('./images/vine-bottom-right.png'),
+    url('./images/vine-bottom-left.png');
+    background-position:
+    top left,
+    top right,
+    bottom right,
+    bottom left;
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-color: $secondary;   
+    color: $primary;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
+    padding: 0 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    margin: 2rem 0;
+}
+
+.flower-list {
+    
+    .flower-card-container {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .flower-card {
+            flex-basis: 25%;
+            background-color: $white;
+            padding: 2rem;
+            margin: 1rem;
+            display: flex;
+            border: 3px solid $tertiary;  
+            border-radius: 1rem;
+            
+    
+            .flower-title-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-right: 2rem;
+    
+                .flower-title {
+                    margin: 0 0 0.5rem 0;
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+        
+                .flower-symbolism {
+                    color: $fourth;
+                    font-size: 14px;
+                }
+            }
+    
+            .flower-image {
+                width: 15rem;
+            }
+        }
+    }
+
+    
+}
+
+.new-flower {
+
+}
+
+.delete-flower {
+
+}
+
+button {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 16px;
+    color: $secondary;
+    background-color: $primary;
+    border: 2px solid $tertiary;
+    border-radius: 5px;
+    margin: 0 1rem; 
+
+    &.cancel {
+        background-color: $white;
+        color: $fourth;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        opacity: 0.75;
+    }
+}
