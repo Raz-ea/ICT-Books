@@ -5,70 +5,69 @@ import db from '@/firebase/init.js'
 
 const showCreateModal = ref(false);
 const showDeleteModal = ref(false);
-const newFlower = ref(
+const newBook = ref(
   {
-    name: "",
-    symbolism: "",
+    title: "",
+    author: "",
     imageUrl: ""
   }
 );
-const deleteFlowerName = ref("");
-const flowerList = ref([]);
+const deleteBookTitle = ref("");
+const bookList = ref([]);
 
 onMounted(() => {
-  getSavedFlowers();
+  getSavedBooks();
 });
 
-//Create
-async function createFlower() {
-  const docRef = doc(db, 'flowers', newFlower.value.name);
-  await setDoc(docRef, newFlower.value);
+// Create
+async function createBook() {
+  const docRef = doc(db, 'books', newBook.value.title);
+  await setDoc(docRef, newBook.value);
 
   showCreateModal.value = false;
-  newFlower.value.name = "";
-  newFlower.value.symbolism = "";
-  newFlower.value.imageUrl = "";
+  newBook.value.title = "";
+  newBook.value.author = "";
+  newBook.value.imageUrl = "";
 
-  getSavedFlowers();
+  getSavedBooks();
 }
 
-//Delete
-async function deleteFlower() {
-  if (!!deleteFlowerName.value) {
-    await deleteDoc(doc(db, 'flowers', deleteFlowerName.value));
-    showDeleteModal = false;
-    deleteFlowerName.value = "";
-    getSavedFlowers();
+// Delete
+async function deleteBook() {
+  if (!!deleteBookTitle.value) {
+    await deleteDoc(doc(db, 'books', deleteBookTitle.value));
+    showDeleteModal.value = false;
+    deleteBookTitle.value = "";
+    getSavedBooks();
   }
 }
 
-//Read
-async function getSavedFlowers() {
-  const colRef = collection(db, 'flowers');
-  const flowerQuery = await getDocs(query(colRef));
+// Read
+async function getSavedBooks() {
+  const colRef = collection(db, 'books');
+  const bookQuery = await getDocs(query(colRef));
 
-  flowerList.value = [];
-  flowerQuery.forEach((doc) => {
-    flowerList.value.push(doc.data());
+  bookList.value = [];
+  bookQuery.forEach((doc) => {
+    bookList.value.push(doc.data());
   })
 }
-
 </script>
 
 <template>
   <header>
-    <h1 class="title">⚘ Flowers ⚘</h1>
+    <h1>Books</h1>
   </header>
   <main>
-    <section class="flower-list">
-      <h3>My Favourite Flowers</h3>
-      <div class="flower-card-container">
-        <div class="flower-card" v-for="flower in flowerList">
-          <div class="flower-title-container">
-            <h5 class="flower-title">{{ flower.name }}</h5>
-            <div class="flower-symbolism"><i>{{ flower.symbolism }}</i></div>
+    <section class="book-list">
+      <h3>Favourite Books</h3>
+      <div class="book-card-container">
+        <div class="book-card" v-for="book in bookList">
+          <div class="book-title-container">
+            <h5 class="book-title">{{ book.title }}</h5>
+            <div class="book-author"><i>{{ book.author }}</i></div>
           </div>
-          <img class="flower-image" :src="flower.imageUrl"/>
+          <img class="book-image" :src="book.imageUrl"/>
         </div>
       </div>
       <button 
@@ -77,8 +76,7 @@ async function getSavedFlowers() {
       >
         New Entry
       </button>
-      <button
-        class="cancel"
+      <button 
         v-if="!showCreateModal && !showDeleteModal"
         @click="showDeleteModal = true"
       >
@@ -86,31 +84,31 @@ async function getSavedFlowers() {
       </button>
     </section>
 
-    <section class="new-flower" v-if="showCreateModal">
+    <section class="new-book" v-if="showCreateModal">
       <div>
-        <label>Flower Name:</label>
-        <input v-model="newFlower.name"/>
+        <label>Book Title:</label>
+        <input v-model="newBook.title"/>
       </div>
       <div>
-        <label>Symbolism:</label>
-        <input v-model="newFlower.symbolism"/>
+        <label>Author:</label>
+        <input v-model="newBook.author"/>
       </div>
       <div>
         <label>Image Url:</label>
-        <input v-model="newFlower.imageUrl"/>
+        <input v-model="newBook.imageUrl"/>
       </div>
-      <button @click="createFlower()">Save</button>
-      <button class="cancel" @click="showCreateModal = false">Cancel</button>
+      <button @click="createBook()">Save</button>
+      <button @click="showCreateModal = false">Cancel</button>
     </section>
 
-    <section class="delete-flower" v-if="showDeleteModal">
-      <select v-model="deleteFlowerName">
-        <option v-for="flower in flowerList" :key="flower.id" :value="flower.name">
-          {{ flower.name }}
+    <section class="delete-book" v-if="showDeleteModal">
+      <select v-model="deleteBookTitle">
+        <option v-for="book in bookList" :key="book.id" :value="book.title">
+          {{ book.title }}
         </option>
       </select>
-      <button @click="deleteFlower()">Delete</button>
-      <button class="cancel"   @click="showDeleteModal = false">Cancel</button>
+      <button @click="deleteBook()">Delete</button>
+      <button @click="showDeleteModal = false">Cancel</button>
     </section>
   </main>
 </template>

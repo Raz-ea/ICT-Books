@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd ${{ secrets.PROJECT_PATH }}
-            git pull https://${{ secrets.TOKEN }}@github.com/Malyvak/ICT-Test.git 
+            git pull https://${{ secrets.TOKEN }}@github.com/Raz-ea/ICT-Books.git 
             docker-compose down
             docker-compose up -d --build
   
