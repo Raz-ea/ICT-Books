@@ -1,8 +1,18 @@
-header {
+
+:root {
+    --beige: #f8f1e6;
+    --gold: #d4a661;
+    --darkBrown: #5c4637;
+    --lightBrown: #8a725d;
+  }
+  
+  header {
     text-align: center;
-    background-color: #f8f1e6; /* Warmer beige */
-    color: #d4a661; /* Gold text */
+    background-color: var(--beige);
+    color: var(--gold);
     padding: 1rem;
+    display: flex;
+    justify-content: space-around;
   }
   
   main {
@@ -11,13 +21,17 @@ header {
     margin: 2rem;
   }
   
-  .book-list, .new-book, .delete-book {
-    width: 30%;
+  .book-list,
+  .new-book,
+  .delete-book {
+    width: 100%;
+    text-align: center;
   }
   
+  /* Improve Book List Styles */
   .book-list {
     h3 {
-      color: #d4a661; /* Gold */
+      color: var(--gold);
       margin-bottom: 1rem;
     }
   
@@ -25,17 +39,19 @@ header {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      justify-content: space-around; /* Adjusted to distribute cards equally */
     }
   
     .book-card {
-      flex: 1 0 calc(25% - 2rem); /* Take up all available space on the margin's row with margin */
-      margin-bottom: 2rem; /* Added margin between rows */
-      background-color: #f8f1e6; /* Warmer beige */
-      border: 1px solid #e0d7cb; /* Lighter beige border */
+      flex: 1; /* Adjusted to distribute cards equally */
+      margin-bottom: 2rem;
+      background-color: var(--beige);
+      border: 1px solid #e0d7cb;
       padding: 1.5rem;
-      border-radius: 12px; /* Increased border radius for a softer look */
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Enhanced box shadow for depth */
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease-in-out;
+  
   
       &:hover {
         transform: scale(1.05);
@@ -43,71 +59,56 @@ header {
   
       .book-title-container {
         display: flex;
-        flex-direction: column; /* Display title and author vertically */
+        flex-direction: column;
         align-items: center;
       }
   
       .book-title {
         margin-bottom: 0.5rem;
-        color: #5c4637; /* Darker brown text */
-        font-size: 1.5rem; /* Increased font size for the title */
-        font-weight: bold; /* Added bold font weight */
-        text-align: center; /* Center-align text */
+        color: #5c4637;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
       }
   
       .book-author {
-        color: #8a725d; /* Lighter brown text */
-        font-style: italic; /* Added italic style for author */
+        color: #8a725d;
+        font-style: helvitica;
       }
   
       .book-image {
         max-width: 100%;
         height: auto;
-        margin-top: 1rem; /* Increased margin between title and image */
-        border-radius: 8px; /* Slight border radius for the image */
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Lighter box shadow for the image */
+        margin-top: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
     }
   }
   
-  .new-book, .delete-book {
-    margin-top: 2rem;
+  /* Enhance Button Styles */
+  button {
+    background-color: var(--gold);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin: 0.5rem;
   
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: #5c4637; /* Darker brown text */
-    }
-  
-    input {
-      width: 100%;
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-      border: 1px solid #e0d7cb; /* Lighter beige border */
-      border-radius: 4px;
-    }
-  
-    button {
-      background-color: #d4a661; /* Gold */
-      color: #fff; /* White text */
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-right: 1rem;
-      transition: background-color 0.3s ease-in-out;
-  
-      &:hover {
-        background-color: #b0823b; /* Darker gold on hover */
-      }
-    }
-  
-    select {
-      width: 100%;
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-      border: 1px solid #e0d7cb; /* Lighter beige border */
-      border-radius: 4px;
+    &:hover {
+      background-color: #b0823b;
     }
   }
   
+  /* Add Some Box Shadow to Input Fields */
+  input,
+  select {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0d7cb;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }

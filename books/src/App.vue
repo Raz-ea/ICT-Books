@@ -5,13 +5,11 @@ import db from '@/firebase/init.js'
 
 const showCreateModal = ref(false);
 const showDeleteModal = ref(false);
-const newBook = ref(
-  {
-    title: "",
-    author: "",
-    imageUrl: ""
-  }
-);
+const newBook = ref({
+  title: "",
+  author: "",
+  imageUrl: ""
+});
 const deleteBookTitle = ref("");
 const bookList = ref([]);
 
@@ -61,27 +59,29 @@ async function getSavedBooks() {
   <main>
     <section class="book-list">
       <h3>Favourite Books</h3>
+      <div class="action-buttons">
+        <button 
+          v-if="!showCreateModal && !showDeleteModal"
+          @click="showCreateModal = true"
+        >
+          New Entry
+        </button>
+        <button 
+          v-if="!showCreateModal && !showDeleteModal"
+          @click="showDeleteModal = true"
+        >
+          Delete Entry
+        </button>
+      </div>
       <div class="book-card-container">
-        <div class="book-card" v-for="book in bookList">
+        <div class="book-card" v-for="book in bookList" :key="book.id">
           <div class="book-title-container">
             <h5 class="book-title">{{ book.title }}</h5>
             <div class="book-author"><i>{{ book.author }}</i></div>
           </div>
-          <img class="book-image" :src="book.imageUrl"/>
+          <img class="book-image" :src="book.imageUrl" alt="Book cover"/>
         </div>
       </div>
-      <button 
-        v-if="!showCreateModal && !showDeleteModal"
-        @click="showCreateModal = true"
-      >
-        New Entry
-      </button>
-      <button 
-        v-if="!showCreateModal && !showDeleteModal"
-        @click="showDeleteModal = true"
-      >
-        Delete Entry
-      </button>
     </section>
 
     <section class="new-book" v-if="showCreateModal">
@@ -112,3 +112,5 @@ async function getSavedBooks() {
     </section>
   </main>
 </template>
+
+
