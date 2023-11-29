@@ -1,6 +1,6 @@
 version: '3'
 services:
   web:
-    build: ./ict-test
+    build: ./books
     ports:
       - "80:80"
